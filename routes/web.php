@@ -3,6 +3,7 @@
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\Configuracion\RolController;
     use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\Configuracion\EntidadController;
 
     /*
     |--------------------------------------------------------------------------
@@ -93,6 +94,45 @@
                         ->name('update');
 
                 });
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | ENTIDADES
+            |--------------------------------------------------------------------------
+            */
+
+            Route::prefix('configuracion/entidades')
+                ->name('entidades.')
+                ->group(function () {
+
+                    Route::get('/', [EntidadController::class, 'listar'])
+                        ->name('listar');
+
+                    Route::get('/crear', [EntidadController::class, 'create'])
+                        ->name('create');
+
+                    Route::post('/', [EntidadController::class, 'store'])
+                        ->name('store');
+
+                    Route::get('/{entidad}/detalle', [EntidadController::class, 'detalle'])
+                        ->name('detalle');
+
+                    Route::get('/{entidad}/editar', [EntidadController::class, 'edit'])
+                        ->name('edit');
+
+                    Route::put('/{entidad}', [EntidadController::class, 'update'])
+                        ->name('update');
+
+                    Route::get('/{entidad}/estado', [EntidadController::class, 'editarEstado'])
+                        ->name('estado');
+
+                    Route::patch('/{entidad}/estado', [EntidadController::class, 'actualizarEstado'])
+                        ->name('actualizarEstado');
+
+                });
+
 
         });
 
